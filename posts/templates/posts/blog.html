@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+
+    <div class="card" style="width: 20rem;">
+  <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+  <div class="card-block">
+      <h4 class="card-title"><b>Blog: {{ object.id }}</b></h4>
+    <p class="card-text">Blog's content: {{ object.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+      {% if object.post_set.all %}
+      {% for post in object.post_set.all %}
+        <li class="list-group-item">Post: {{ post.id }}</li>
+  </ul>
+            {% endfor %}
+        {% else %}
+            <div><b>Nothing</b></div>
+        {%  endif %}
+    </div>
+{% endblock %}
+
+
+

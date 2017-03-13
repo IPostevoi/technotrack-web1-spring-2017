@@ -1,0 +1,11 @@
+{% extends "core/base.html" %}
+{% block content %}
+    {% for post in object_list %}
+            <div class="card" style="width: 20rem;">
+                <div class="card-block"><h4 class="card-title">Post #{{ post.id }}</h4>
+                    <p class="card-text">{{ post.text }}</p>
+                    <a href=" {% url "posts:PostComments" pk=post.id %}  " class="btn btn-primary">Go to comments</a>
+                </div>
+            </div>
+    {% endfor %}
+{% endblock %}

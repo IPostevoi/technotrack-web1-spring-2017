@@ -37,7 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core.apps.CoreConfig',
+    'posts.apps.PostsConfig',
+    'bootstrap3',
+    'comments.apps.CommentsConfig',
 ]
+
+AUTH_USER_MODEL = 'core.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +56,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'application.urls'
+
+MEDIA_URL = '/home/media/'
+MEDIA_ROOT = '/home/vagrant/vdata/stackoverflow/media/'
 
 TEMPLATES = [
     {

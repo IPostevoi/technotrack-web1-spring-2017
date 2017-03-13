@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+
+{% block content %}
+    {% for blog in object_list %}
+    <div class="card" style="width: 20rem;">
+  <div class="card-block">
+    <h4 class="card-title">Blog #{{ blog.id }}</h4>
+    <p class="card-text">{{ blog.description }}</p>
+    <a href=" {% url "posts:blog" pk=blog.id %} " class="btn btn-primary">Go to blog</a>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

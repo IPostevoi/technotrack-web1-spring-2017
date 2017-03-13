@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <p>All comments in the blog: </p>
+    {% for post in object.post_set.all %}
+        {% for comm in post.comment_set.all %}
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                {{ comm.author }}
+                </div>
+                <div class="panel-footer">Pcomm.body</div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

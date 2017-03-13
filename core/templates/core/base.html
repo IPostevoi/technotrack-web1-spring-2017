@@ -1,0 +1,45 @@
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    {% block title %}
+    <title>Start Page</title>
+    {% endblock %}
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
+      <a class="navbar-brand" href=" {% url "startPage" %} ">Home</a>
+      {% block redirect %}
+      <a class="navbar-brand" href=" {% url "posts:blogs" %} ">Blogs list</a>
+      <a class="navbar-brand" href=" {% url "posts:posts" %} ">Posts list</a>
+      {% endblock %}
+
+    </nav>
+    <div class="container">
+        {% block content %}
+      SAMPLE TEXT
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+  </body>
+</html>
