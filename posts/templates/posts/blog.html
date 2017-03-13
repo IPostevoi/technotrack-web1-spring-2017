@@ -12,7 +12,8 @@
   <ul class="list-group list-group-flush">
       {% if object.post_set.all %}
       {% for post in object.post_set.all %}
-        <li class="list-group-item">Post: {{ post.id }}</li>
+        <li class="list-group-item">Post: {{ post.id }}
+        <a href=" {% url "posts:PostComments" pk=post.id %}  " class="btn btn-primary">Go to comments</a></li>
   </ul>
             {% endfor %}
         {% else %}

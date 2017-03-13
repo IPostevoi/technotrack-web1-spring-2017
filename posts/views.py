@@ -22,12 +22,6 @@ class BlogPage(DetailView):
     template_name = 'posts/blog.html'
 
 
-class CommentsList(DetailView):
-
-    queryset = Blog.objects.all()
-    template_name = 'posts/comments.html'
-
-
 class PostComments(DetailView):
 
     queryset = Post.objects.all()

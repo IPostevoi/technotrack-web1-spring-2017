@@ -25,7 +25,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', start, name="startPage"),
     url(r'^blogs/', include('posts.urls', namespace="posts")),
-    #url(r'^posts/', include('posts.urls', namespace="posts")),
 
 ]
 
