@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from core.views import start
+from core.views import HomePageView
 from django.conf import settings
 if settings.DEBUG is True:
     from django.conf.urls.static import static
@@ -23,7 +23,7 @@ if settings.DEBUG is True:
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', start, name="startPage"),
+    url(r'^$', HomePageView.as_view(), name="startPage"),
     url(r'^blogs/', include('posts.urls', namespace="posts")),
 
 ]

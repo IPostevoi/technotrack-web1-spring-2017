@@ -1,8 +1,8 @@
 from django.conf.urls import url
 from core.views import start
-from .views import CommentsList
+from .views import HomePageView
 
 
 #urlpatterns = [
-  #  url(r'^$', CommentsList),
+    #url(r'^$', HomePageView.as_view, name='home'),
 #]
