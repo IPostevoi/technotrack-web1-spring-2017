@@ -9,7 +9,7 @@ class HomePageView(TemplateView):
     template_name = "core/startPage.html"
 
     def get_context_data(self, **kwargs):
-        
+
         context = super(HomePageView, self).get_context_data(**kwargs)
         context["blogs"] = Blog.objects.all().count()
         context["posts"] = Post.objects.all().count()

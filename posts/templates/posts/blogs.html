@@ -2,10 +2,18 @@
 
 
 {% block content %}
+    <div>
+          <form method="get" action="{% url "posts:blogs" %}">
+              {{ sortform }}
+              <input type="submit">
+          </form>
+      </div>
     {% for blog in object_list %}
     <div class="card" style="width: 20rem;">
   <div class="card-block">
     <h4 class="card-title">Blog #{{ blog.id }}</h4>
+      <p>Time: {{ blog.time }}</p>
+      <p>Blog's author: {{ blog.author }}</p>
     <p class="card-text">{{ blog.description }}</p>
     <a href=" {% url "posts:blog" pk=blog.id %} " class="btn btn-primary">Go to blog</a>
   </div>

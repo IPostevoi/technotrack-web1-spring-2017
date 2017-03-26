@@ -8,11 +8,16 @@ from django.db import models
 class Blog(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='published_blogs', null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='published_blogs')
+    time = models.DateTimeField(auto_now_add=True)
 
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    blog = models.ForeignKey('posts.Blog', null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='published_posts', null=True)
+    blog = models.ForeignKey('posts.Blog')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='published_posts')
+    time = models.DateTimeField(auto_now_add=True)
+
+
+    #

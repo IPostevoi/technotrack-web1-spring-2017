@@ -7,17 +7,19 @@
   <!--<img class="card-img-top" src="..." alt="Card image cap">-->
   <div class="card-block">
       <h4 class="card-title"><b>Blog: {{ object.id }}</b></h4>
+      <p>Author: {{ object.author }}</p>
     <p class="card-text">Blog's content: {{ object.description }}</p>
   </div>
   <ul class="list-group list-group-flush">
       {% if object.post_set.all %}
       {% for post in object.post_set.all %}
-        <li class="list-group-item">Post: {{ post.id }}
+        <li class="list-group-item">Post: {{ post.id }} <br/>
+            Text: {{ post.text }}
         <a href=" {% url "posts:PostComments" pk=post.id %}  " class="btn btn-primary">Go to comments</a></li>
   </ul>
             {% endfor %}
         {% else %}
-            <div><b>Nothing</b></div>
+            <div><b>Nothing in posts</b></div>
         {%  endif %}
     </div>
 {% endblock %}

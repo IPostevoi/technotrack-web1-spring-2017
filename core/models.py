@@ -6,6 +6,5 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
 
-    #avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
-    pass
-# Create your models here.
+    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
+
