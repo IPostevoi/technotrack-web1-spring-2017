@@ -20,4 +20,13 @@ class Post(models.Model):
     time = models.DateTimeField(auto_now_add=True)
 
 
+class Category(models.Model):
+    blogs = models.ManyToManyField(Blog)
+
+
+class Like(models.Model):
+    posts = models.ManyToManyField(Post)
+
+
+
     #

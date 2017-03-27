@@ -39,9 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'posts.apps.PostsConfig',
+    'widget_tweaks',
     'bootstrap3',
     'comments.apps.CommentsConfig',
 ]
+
+LOGIN_URL = 'core:login'
+
+LOGIN_REDIRECT_URL = 'startPage'
+
+LOGOUT_REDIRECT_URL = 'startPage'
 
 AUTH_USER_MODEL = 'core.User'
 

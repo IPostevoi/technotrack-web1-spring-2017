@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="/home/bakla410/Downloads/bootstrap-4.0.0-alpha.6-dist/css/Bootstrap.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -22,15 +23,27 @@
   </head>
 
   <body>
-
+    <link rel="javascript" src="/home/bakla410/Downloads/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.js">
+    <link rel="javascript" src="/home/bakla410/Downloads/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.min.js">
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
       <a class="navbar-brand" href=" {% url "startPage" %} ">Home</a>
       {% block redirect %}
-      <a class="navbar-brand" href=" {% url "posts:blogs" %} ">Blogs list</a>
-      <a class="navbar-brand" href=" {% url "posts:posts" %} ">Posts list</a>
+          <a class="navbar-brand" href=" {% url "posts:blogs" %} ">Blogs list</a>
+          <a class="navbar-brand" href=" {% url "posts:posts" %} ">Posts list</a>
+          <a class="navbar-brand" href=" {% url "posts:addblog" %} ">Add blog</a></a>
+          {% block login %}
+              {% if user.is_anonymous %}
+                    <a class="navbar-brand" href=" {% url "core:login" %} ">Login</a>
+                    <a class="navbar-brand" href=" {% url "core:register" %} ">Register</a>
+              {% else %}
+                    <a class="navbar-brand">{{ user.username }}</a>
+                    <a class="navbar-brand" href=" {% url "core:logout" %} ">Logout</a>
+                {% endif %}>
+          {% endblock %}
       {% endblock %}
 
     </nav>
+
     <div class="container">
         {% block content %}
       SAMPLE TEXT

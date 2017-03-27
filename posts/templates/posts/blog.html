@@ -2,27 +2,51 @@
 
 {% block content %}
 
+<div class="container">
+	<div class="row">
+        <div class="col-md-6">
+		    <div class="panel panel-default">
+                <div class="panel-heading"><strong><a class="post-title" href="#">{{ object.title }}e</a></strong></div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <a href="#" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+                        </div>
+                        <p>
+                            {{ object.description }}
+                        </p>
 
-    <div class="card" style="width: 20rem;">
-  <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-  <div class="card-block">
-      <h4 class="card-title"><b>Blog: {{ object.id }}</b></h4>
-      <p>Author: {{ object.author }}</p>
-    <p class="card-text">Blog's content: {{ object.description }}</p>
-  </div>
-  <ul class="list-group list-group-flush">
-      {% if object.post_set.all %}
+                    </div>
+                <div class="panel-footer">
+                    <span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> <a href="#" id="startedby">{{ object.author }}</a> |
+                    <span class="glyphicon glyphicon-th-large" id="visit"></span> <a href="#" id="visited">Category</a> |
+                     {% if object.author == user %}
+                    <span class="glyphicon glyphicon-comment" id="comment"></span> <a href=" {% url "posts:editblog" pk=blog.id %}">Редактировать</a> |
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+    {% if object.post_set.all %}
       {% for post in object.post_set.all %}
-        <li class="list-group-item">Post: {{ post.id }} <br/>
-            Text: {{ post.text }}
-        <a href=" {% url "posts:PostComments" pk=post.id %}  " class="btn btn-primary">Go to comments</a></li>
-  </ul>
+        <div class="col-md-10 blogShort">
+                     <h1>{{ post.title }}</h1>
+                     <article><p>
+                        {{ post.text }}
+                         </p></article>
+                    {% if object.author == user %}
+                        <a href=" {% url "posts:editpost" pk=post.id %}  " class="btn btn-primary">Edit post</a>
+                    {% endif %}
+                        <a href=" {% url "posts:PostComments" pk=post.id %}  " class="btn btn-primary">Comments</a>
+                 </div>
             {% endfor %}
         {% else %}
             <div><b>Nothing in posts</b></div>
         {%  endif %}
-    </div>
+
 {% endblock %}
+
+
 
 
 

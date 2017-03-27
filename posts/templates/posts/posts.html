@@ -1,11 +1,15 @@
 {% extends "core/base.html" %}
 {% block content %}
+    <a href=" {% url "posts:addpost" %}  " class="btn btn-primary">Add post</a>
     {% for post in object_list %}
             <div class="card" style="width: 20rem;">
                 <div class="card-block"><h4 class="card-title">Post #{{ post.id }}</h4>
                     <p>Post's author: {{ post.author }}</p>
                     <p>Time: {{ post.time }}</p>
                     <p class="card-text">Text: {{ post.text }}</p>
+                    {% if post.author == user.username %}
+                    <a href=" {% url "posts:editpost" pk=post.id %}  " class="btn btn-primary">Edit post</a>
+                    {% endif %}
                     <a href=" {% url "posts:PostComments" pk=post.id %}  " class="btn btn-primary">Go to comments</a>
                 </div>
             </div>
