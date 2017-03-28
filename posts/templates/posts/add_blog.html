@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-    <form action="{% url "posts:addcomment" pk=object.post_id %}" method="post">
+    <form action="{% url 'posts:add_blog' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit">

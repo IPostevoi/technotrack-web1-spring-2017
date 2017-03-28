@@ -26,11 +26,11 @@
     <link rel="javascript" src="/home/bakla410/Downloads/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.js">
     <link rel="javascript" src="/home/bakla410/Downloads/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.min.js">
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
-      <a class="navbar-brand" href=" {% url "startPage" %} ">Home</a>
+      <a class="navbar-brand" href=" {% url "home_page" %} ">Home</a>
       {% block redirect %}
           <a class="navbar-brand" href=" {% url "posts:blogs" %} ">Blogs list</a>
           <a class="navbar-brand" href=" {% url "posts:posts" %} ">Posts list</a>
-          <a class="navbar-brand" href=" {% url "posts:addblog" %} ">Add blog</a></a>
+          <a class="navbar-brand" href=" {% url 'posts:add_blog' %} ">Add blog</a></a>
           {% block login %}
               {% if user.is_anonymous %}
                     <a class="navbar-brand" href=" {% url "core:login" %} ">Login</a>

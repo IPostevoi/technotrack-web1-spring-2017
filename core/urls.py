@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
-from core.views import  RegisterFormView
+from core.views import RegisterFormView
 
 urlpatterns = [
     url(r'^login/$', login, {"template_name": 'core/login.html'}, name='login'),

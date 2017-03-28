@@ -11,7 +11,7 @@ from django.views.generic.base import TemplateView
 
 class HomePageView(TemplateView):
 
-    template_name = "core/startPage.html"
+    template_name = "core/home_page.html"
 
     def get_context_data(self, **kwargs):
 

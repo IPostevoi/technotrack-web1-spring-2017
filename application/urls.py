@@ -23,7 +23,7 @@ if settings.DEBUG is True:
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', HomePageView.as_view(), name="startPage"),
+    url(r'^$', HomePageView.as_view(), name="home_page"),
     url(r'^blogs/', include('posts.urls', namespace="posts")),
     url(r'^core/', include('core.urls', namespace="core")),
 

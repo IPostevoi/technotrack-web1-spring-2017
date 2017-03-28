@@ -46,9 +46,9 @@ INSTALLED_APPS = [
 
 LOGIN_URL = 'core:login'
 
-LOGIN_REDIRECT_URL = 'startPage'
+LOGIN_REDIRECT_URL = 'home_page'
 
-LOGOUT_REDIRECT_URL = 'startPage'
+LOGOUT_REDIRECT_URL = 'home_page'
 
 AUTH_USER_MODEL = 'core.User'
 
@@ -64,8 +64,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'application.urls'
 
-MEDIA_URL = '/home/media/'
-MEDIA_ROOT = '/home/vagrant/vdata/stackoverflow/media/'
 
 TEMPLATES = [
     {
@@ -137,3 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+MEDIA_ROOT = '/home/bakla410/Desktop/TechnotrackWeb/src/media'
+MEDIA_URL = '/media/'

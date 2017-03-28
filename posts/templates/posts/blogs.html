@@ -3,42 +3,48 @@
 
 {% block content %}
     <div>
-          <form method="get" action="{% url "posts:blogs" %}">
-              {{ sortform.sort }}{{ sortform.search }}{{ sortform.search.errors }}
-              <input type="submit">
-          </form>
-      </div>
+        <form method="get" action="{% url "posts:blogs" %}">
+            {{ sortform.sort }}{{ sortform.search }}{{ sortform.search.errors }}
+            <input type="submit">
+        </form>
+    </div>
     {% for blog in object_list %}
-    <div class="container">
-	<div class="row">
-        <div class="col-md-6">
-		    <div class="panel panel-default">
-                <div class="panel-heading"><strong><a class="post-title" href="#">{{ blog.title }}e</a></strong></div>
-                    <div class="panel-body">
-                        <div class="col-md-6">
-                            <a href="#" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong><a class="post-title" href="#">{{ blog.title }}</a></strong>
                         </div>
-                        <p>
-                            {{ object.description }}
-                        </p>
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                {% if blog.pic.url != Null %}
+                                    <a href="#" class="thumbnail"><img src="{{ blog.pic.url }}" alt="img"></a>
+                                {% else %}
+                                    <a href="#" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+                                {% endif %}
+                            </div>
+                            <p>
+                                {{ object.description }}
+                            </p>
 
+                        </div>
+                        <div class="panel-footer">
+                            <span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> <a
+                                href="#" id="startedby">{{ blog.author }}</a> |
+                            <span class="glyphicon glyphicon-time" id="comment"></span> {{ blog.time }} |
+                            <span class="glyphicon glyphicon-th-large" id="visit"></span> <a href="#" id="visited">Category</a>
+                            |
+                            {% if blog.author == user %}
+                                <span class="glyphicon glyphicon-pencil" id="comment"></span>
+                                <a href=" {% url "posts:edit_blog" pk=blog.id %}">Редактировать</a> |
+                            {% endif %}
+                            <a href=" {% url "posts:blog" pk=blog.id %} " class="btn btn-primary">Go to blog</a>
+                        </div>
                     </div>
-                <div class="panel-footer">
-                    <span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> <a href="#" id="startedby">{{ blog.author }}</a> |
-                <span class="glyphicon glyphicon-time" id="comment"></span> {{ blog.time }} |
-                    <span class="glyphicon glyphicon-th-large" id="visit"></span> <a href="#" id="visited">Category</a> |
-                     {% if blog.author == user %}
-                    <span class="glyphicon glyphicon-pencil" id="comment"></span> <a href=" {% url "posts:editblog" pk=blog.id %}">Редактировать</a> |
-                        {% endif %}
-                    <a href=" {% url "posts:blog" pk=blog.id %} " class="btn btn-primary">Go to blog</a>
                 </div>
             </div>
         </div>
-	</div>
-</div>
 
-  </div>
-</div>
-{% endfor %}
+    {% endfor %}
 {% endblock %}
 
