@@ -1,22 +1,40 @@
 {% extends "core/base.html" %}
 {% block content %}
-    <div>
-        <form method="get" action="{% url "posts:posts" %}">
-            {{ sortform.sort }}{{ sortform.search }}{{ sortform.search.errors }}
-            <input type="submit">
-        </form>
-    </div>
-    {% for post in object_list %}
-            <div class="card" style="width: 20rem;">
-                <div class="card-block"><h4 class="card-title">Post #{{ post.id }}</h4>
-                    <p>Post's author: {{ post.author }}</p>
-                    <p>Time: {{ post.time }}</p>
-                    <p class="card-text">Text: {{ post.text }}</p>
-                    {% if post.author == user.username %}
-                    <a href=" {% url 'posts:edit_post' pk=post.id %}  " class="btn btn-primary">Edit post</a>
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            {% for post in object_list %}
+
+                <div>
+                <h2>
+                    <div>{{ post.title }}</div>
+                </h2>
+
+                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.time }} |
+                    <span class="glyphicon glyphicon-user"></span> By {{ post.author }} |
+                    {% if post.author == user %}
+                        <span class="glyphicon glyphicon-pencil" id="comment"></span>
+                        <a href=" {% url 'posts:edit_post' pk=post.id %}">Редактировать пост</a> </p>
                     {% endif %}
-                    <a href=" {% url "posts:post_comments" pk=post.id %}  " class="btn btn-primary">Go to comments</a>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus
+                    inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis
+                    ipsum officiis rerum.</p>
+                <a class="btn btn-primary" href="{% url "posts:post_comments" pk=post.id %}">Комментарии<span
+                        class="glyphicon glyphicon-chevron-right"></span></a>
+
+                <hr>
                 </div>
-            </div>
-    {% endfor %}
+
+
+
+            {% endfor %}
+    </div>
+    <!-- /.row -->
+
+    </div>
+
+
+
 {% endblock %}

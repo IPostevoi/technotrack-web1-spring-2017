@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from .models import Blog, Post
+from core.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django import forms
@@ -85,11 +86,18 @@ class BlogsList(ListView):
 
     def get_queryset(self):
         qs = super(BlogsList, self).get_queryset()
+
+        sort = self.request.GET.get('user')
+        if sort == 'my':
+            qs = qs.filter(author=self.request.user)
+        elif sort:
+            user = User.objects.filter(username=sort).first()
+            qs = qs.filter(author=user)
+
         if self.sortform.is_valid():
-            if self.sortform.cleaned_data['sort'] == 'author':
-                qs = qs.filter(author_id=self.request.user)
-            else:
-                qs = qs.order_by(self.sortform.cleaned_data['sort'])
+
+            # else:
+            #     qs = qs.order_by(self.sortform.cleaned_data['sort'])
             if self.sortform.cleaned_data['search']:
                 qs = qs.filter(title__contains=self.sortform.cleaned_data['search'])
         return qs

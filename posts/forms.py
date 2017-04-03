@@ -9,7 +9,7 @@ class SortForm(forms.Form):
         ('title', u'Заголовок'),
         ('-time', u'Время'),
         ('id', u'Id'),
-        ('author', u'Мои записи'),
+        ('my', u'Мои Блоги'),
     ))
     search = forms.CharField(required=False)
 

@@ -1,19 +1,19 @@
 {% extends "core/base.html" %}
 {% block content %}
-    <a href=" {% url 'posts:add_comment' pk=post.id %}  " class="btn btn-primary">Add comment</a>
+    <a href=" {% url 'posts:add_comment' pk=post.id %}  " class="btn btn-primary">Добавить комментарий</a>
     <p><b>All comments in the post:</b></p>
     {% if post.comment_set.all %}
         {% for comm in post.comment_set.all %}
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    <b>Author:</b> {{ comm.author }}
-                    <p>Time: {{ comm.time }}</p>
+                    <b>Автор:</b> {{ comm.author }}
+                    <p>Время: {{ comm.time }}</p>
                 </div>
                 <div class="panel-footer">{{ comm.body }}</div>
             </div>
         {% endfor %}
     {% else %}
-    <div><b>Nothing in comments</b></div>
+    <div><b>Пока в комментариях пусто</b></div>
     {% endif %}
 
 {% endblock %}

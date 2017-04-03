@@ -19,18 +19,18 @@
     <link href="javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.js' %}">
     <link href="javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}">
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
-      <a class="navbar-brand" href=" {% url "home_page" %} ">Home</a>
+      <a class="navbar-brand" href=" {% url "home_page" %} ">Главная</a>
       {% block redirect %}
-          <a class="navbar-brand" href=" {% url "posts:blogs" %} ">Blogs list</a>
-          <a class="navbar-brand" href=" {% url "posts:posts" %} ">Posts list</a>
-          <a class="navbar-brand" href=" {% url 'posts:add_blog' %} ">Add blog</a></a>
+          <a class="navbar-brand" href=" {% url "posts:blogs" %} ">Список блогов</a>
+          <a class="navbar-brand" href=" {% url "posts:posts" %} ">Список постов</a>
+          <a class="navbar-brand" href=" {% url 'posts:add_blog' %} ">Добавить блог</a></a>
           {% block login %}
               {% if user.is_anonymous %}
-                    <a class="navbar-brand" href=" {% url "core:login" %} ">Login</a>
-                    <a class="navbar-brand" href=" {% url "core:register" %} ">Register</a>
+                    <a class="navbar-brand" href=" {% url "core:login" %} ">Войти</a>
+                    <a class="navbar-brand" href=" {% url "core:register" %} ">Зарегистрироваться</a>
               {% else %}
                     <a class="navbar-brand">{{ user.username }}</a>
-                    <a class="navbar-brand" href=" {% url "core:logout" %} ">Logout</a>
+                    <a class="navbar-brand" href=" {% url "core:logout" %} ">Выйти</a>
                 {% endif %}>
           {% endblock %}
       {% endblock %}
