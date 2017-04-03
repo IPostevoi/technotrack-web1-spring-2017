@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-    <form action="{% url 'add_comment' pk=view.kwargs.pk %}" method="post">
+    <form action="{% url 'posts:add_comment' pk=view.kwargs.pk %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit">

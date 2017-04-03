@@ -22,7 +22,7 @@ class Blog(models.Model):
     description = models.TextField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='published_blogs')
     time = models.DateTimeField(auto_now_add=True)
-    pic = models.ImageField(upload_to='img/', blank=True, null=True)
+    pic = models.ImageField(upload_to='blog_pic', blank=True, null=True)
     #categories = models.ForeignKey(Category)
     
 

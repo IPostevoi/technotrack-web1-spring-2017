@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'posts.apps.PostsConfig',
     'widget_tweaks',
-    'bootstrap3',
+    #'bootstrap3',
     'comments.apps.CommentsConfig',
 ]
 
@@ -134,11 +134,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+  os.path.join(BASE_DIR, 'static/'),
 )
 
-MEDIA_ROOT = '/home/bakla410/Desktop/TechnotrackWeb/src/media'
+STATIC_URL = '/static/'
+
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+'django.contrib.staticfiles.finders.FileSystemFinder',
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
