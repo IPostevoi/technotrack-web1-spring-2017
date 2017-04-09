@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from posts.models import Blog, Post
 from comments.models import Comment
 from django.views.generic.edit import FormView
@@ -41,3 +42,16 @@ class RegisterFormView(CreateView):
         form.save()
         return super(RegisterFormView, self).form_valid(form)
 
+
+class ItemsList(ListView):
+
+    queryset = Blog.objects.all()
+    template_name = 'core/items.html'
+
+    def get_queryset(self):
+        qs = super(ItemsList, self).get_queryset()
+        search = self.request.GET.get('search')
+        if search:
+            qs = qs.filter(title__icontains=unicode(search))
+
+        return qs

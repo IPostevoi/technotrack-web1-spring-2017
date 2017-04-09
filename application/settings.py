@@ -40,11 +40,12 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'posts.apps.PostsConfig',
     'widget_tweaks',
+    'crispy_forms',
     #'bootstrap3',
     'comments.apps.CommentsConfig',
 ]
 
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 LOGIN_URL = 'core:login'
 
@@ -78,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.search_form',
             ],
         },
     },
@@ -117,6 +119,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 
 
 # Internationalization

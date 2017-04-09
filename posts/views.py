@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .models import Blog, Post
+from .models import Blog, Post, Category
 from core.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -75,6 +75,7 @@ class BlogsList(ListView):
     template_name = 'posts/blogs.html'
     searchform = None
     recent_posts = Post.objects.order_by('-time')[:5][::-1]
+    categories = Category.objects.all()
 
     def dispatch(self, request, *args, **kwargs):
         self.searchform = SearchForm(self.request.GET)
@@ -84,17 +85,20 @@ class BlogsList(ListView):
         context = super(BlogsList, self).get_context_data(**kwargs)
         context['searchform'] = self.searchform
         context['recent_posts'] = self.recent_posts
+        context['categories'] = self.categories
         return context
 
     def get_queryset(self):
         qs = super(BlogsList, self).get_queryset()
 
         sort = self.request.GET.get('user')
-        if sort == 'my':
-            qs = qs.filter(author=self.request.user)
-        elif sort:
+        category = self.request.GET.get('category')
+        if sort:
             user = User.objects.filter(username=sort).first()
             qs = qs.filter(author=user)
+
+        if category:
+            qs = qs.filter(category__id=category)
 
         if self.searchform.is_valid():
 

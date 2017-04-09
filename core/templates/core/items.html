@@ -1,8 +1,9 @@
 {% extends "core/base.html" %}
-
 {% block content %}
+    <strong>Найдено: {{ object_list.count }}</strong>
+{% for object in object_list %}
 
-    <div class="col-md-12">
+<div class="col-md-12">
 
         <h1 class="page-header">
             {{ object.title }}
@@ -45,40 +46,6 @@
         <article>{{ object.description }}</article>
         </br>
         <hr>
-        <h2>Посты</h2>
-        <hr>
     </div>
-
-
-    {% if object.post_set.all %}
-
-
-        {% for post in object.post_set.all %}
-            <div class="col-md-12">
-                <h2>
-                    <div>{{ post.title }}</div>
-                </h2>
-
-                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.time }} |
-                    {% if object.author == user %}
-                        <span class="glyphicon glyphicon-pencil" id="comment"></span>
-                        <a href=" {% url 'posts:edit_post' pk=post.id %}">Редактировать пост</a> </p>
-                    {% endif %}
-
-                <article>{{ post.text }}</article>
-                </br>
-                <a class="btn btn-primary" href="{% url "posts:post_comments" pk=post.id %}">Комментарии<span
-                        class="glyphicon glyphicon-chevron-right"></span></a>
-
-                <hr>
-
-            </div>
-
-
-        {% endfor %}
-    {% else %}
-        <div><b>Nothing in posts</b></div>
-    {% endif %}
-
+{% endfor %}
 {% endblock %}
-
