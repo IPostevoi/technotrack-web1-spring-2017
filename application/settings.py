@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'comments.apps.CommentsConfig',
 ]
 
+CRISPY_TEMPLATE_PACK = 'uni_form'
+
 LOGIN_URL = 'core:login'
 
 LOGIN_REDIRECT_URL = 'home_page'

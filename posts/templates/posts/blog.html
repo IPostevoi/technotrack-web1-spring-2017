@@ -2,57 +2,59 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>{{ object.title }}</strong></div>
-                    <div class="panel-body">
-                        <div class="col-md-6">
-                            {% if object.pic.url %}
-                                <a href="#" class="thumbnail"><img src="{{ object.pic.url }}" alt="img"></a>
-                            {% else %}
-                                <a href="#" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-                            {% endif %}
-                        </div>
-                        <p>
-                            {{ object.description }}
-                        </p>
-                    </div>
-                    <div class="panel-footer">
-                        <span class="glyphicon glyphicon-user" id="start"></span> <label
-                            id="started">By</label> {{ object.author }} |
-                        <span class="glyphicon glyphicon-time" id="comment"></span> {{ blog.time }} |
-                        {% if blog.author == user %}
-                            {% if blog.like_set.all %}
-                                <span class="glyphicon glyphicon-heart" id="visit"></span>
-                            {% else %}
-                                <span class="glyphicon glyphicon-heart-empty" id="visit"></span> 
-                            {% endif %} |
-                        {% endif %}
-                        {% if object.author == user %}
-                            <span class="glyphicon glyphicon-comment" id="comment"></span>
-                            <a href=" {% url 'posts:edit_blog' pk=blog.id %}">Редактировать</a> |
-                            <span class="glyphicon glyphicon-pencil" id="comment"></span>
-                            <a href=" {% url 'posts:add_post' pk=view.kwargs.pk %}">Добавить пост</a> |
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-12">
+
+        <h1 class="page-header">
+            {{ object.title }}
+        </h1>
+
+        <!-- Blog -->
+        <p><span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> 
+            <a href="{% url "posts:blogs" %}?user={{ object.author }}" id="startedby">{{ object.author }}</a> |
+            <span class="glyphicon glyphicon-time" id="comment"></span> {{ object.time }} |
+            <span class="glyphicon glyphicon-th-large" id="visit"></span>
+            {% if object.category_set.all %}
+                {% for category in object.category_set.all %}
+                    {{ category.title }}
+                {% endfor %}
+            {% else %}
+                Без категорий
+            {% endif %}|
+            {% if object.like_set.all %}
+                {{ object.like_set.count }}
+                {% if user.liked_blogs.all and object.like_set.all %}
+                    <span class="glyphicon glyphicon-heart" id="visit"></span>
+                {% endif %}
+            {% else %}
+                <span class="glyphicon glyphicon-heart-empty" id="visit"></span>
+            {% endif %}
+            {% if object.author == user %}
+                |
+                <span class="glyphicon glyphicon-pencil" id="comment"></span>
+                <a href=" {% url "posts:edit_blog" pk=object.id %}">Редактировать</a>
+            {% endif %}
+
+        </p>
+        <hr>
+        {% if blog.pic.url != Null %}
+            <a href="#" class="thumbnail"><img src="{{ object.pic.url }}" alt="img"></a>
+        {% else %}
+            <a href="#" class="thumbnail"><img src="http://placehold.it/900x300" alt=""></a>
+        {% endif %}
+
+        <article>{{ object.description }}</article>
+        </br>
+        <hr>
+        <h2>Посты</h2>
+        <hr>
+    </div>
+
+
     {% if object.post_set.all %}
 
 
         {% for post in object.post_set.all %}
-
-    <!-- Page Content -->
-
-        <div class="row">
-
-            <!-- Blog Entries Column -->
-            <div class="col-md-8">
-
-
+            <div class="col-md-12">
                 <h2>
                     <div>{{ post.title }}</div>
                 </h2>
@@ -63,19 +65,12 @@
                         <a href=" {% url 'posts:edit_post' pk=post.id %}">Редактировать пост</a> </p>
                     {% endif %}
 
-                <p><article>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus
-                    inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis
-                    ipsum officiis rerum.</article></p>
+                <article>{{ post.text }}</article>
+                </br>
                 <a class="btn btn-primary" href="{% url "posts:post_comments" pk=post.id %}">Комментарии<span
                         class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-
-            </div>
-
-
-        </div>
-            <!-- /.row -->
 
             </div>
 
@@ -86,6 +81,4 @@
     {% endif %}
 
 {% endblock %}
-
-
 

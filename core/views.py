@@ -5,7 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-
 from django.views.generic.base import TemplateView
 
 

@@ -11,8 +11,9 @@ class SortForm(forms.Form):
         ('id', u'Id'),
         ('my', u'Мои Блоги'),
     ))
-    search = forms.CharField(required=False)
 
+class SearchForm(forms.Form):
+    search = forms.CharField(required=False)
 
 #class BlogForm(forms.ModelForm):
     #class Meta:

@@ -31,4 +31,4 @@ class Category(models.Model):
 class Like(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     blog = models.ForeignKey(Blog)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='liked_posts')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='liked_blogs')

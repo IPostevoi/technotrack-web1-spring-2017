@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django import forms
 from django.core.urlresolvers import reverse
-from posts.forms import SortForm
+from posts.forms import SortForm, SearchForm
 
 
 class UpdateBlog(UpdateView):
@@ -73,15 +73,17 @@ class BlogsList(ListView):
 
     queryset = Blog.objects.order_by('-time').all()
     template_name = 'posts/blogs.html'
-    sortform = None
+    searchform = None
+    recent_posts = Post.objects.order_by('-time')[:5][::-1]
 
     def dispatch(self, request, *args, **kwargs):
-        self.sortform = SortForm(self.request.GET)
+        self.searchform = SearchForm(self.request.GET)
         return super(BlogsList, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(BlogsList, self).get_context_data(**kwargs)
-        context['sortform'] = self.sortform
+        context['searchform'] = self.searchform
+        context['recent_posts'] = self.recent_posts
         return context
 
     def get_queryset(self):
@@ -94,12 +96,12 @@ class BlogsList(ListView):
             user = User.objects.filter(username=sort).first()
             qs = qs.filter(author=user)
 
-        if self.sortform.is_valid():
+        if self.searchform.is_valid():
 
             # else:
             #     qs = qs.order_by(self.sortform.cleaned_data['sort'])
-            if self.sortform.cleaned_data['search']:
-                qs = qs.filter(title__contains=self.sortform.cleaned_data['search'])
+            if self.searchform.cleaned_data['search']:
+                qs = qs.filter(title__contains=self.searchform.cleaned_data['search'])
         return qs
 
 
