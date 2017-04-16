@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "suggestion": "Fender Standard Stratocaster",
+      "url": "#"
+    },
+    {
+      "suggestion": "Fender American Deluxe Stratocaster",
+      "url": "#",
+      "attr" : [
+        {
+          "class" : "suggestion"
+        }
+      ]
+    },
+    {
+      "suggestion": "Fender Telecaster",
+      "url": "#"
+    },
+    {
+      "suggestion": "Fender Jaguar",
+      "url": "#"
+    },
+    {
+      "suggestion": "Fender Jazzmaster",
+      "url": "#"
+    },
+    {
+      "suggestion": "Gibson Les Paul",
+      "url": "#"
+    },
+    {
+      "suggestion": "Gibson SG",
+      "url": "#"
+    }
+  ]
+}

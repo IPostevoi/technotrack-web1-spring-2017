@@ -2,18 +2,40 @@
 from django import forms
 from .models import Blog, Post
 from django.core.files.images import get_image_dimensions
+from crispy_forms.helper import FormHelper
+from django.core.urlresolvers import reverse
+from crispy_forms.bootstrap import Field
+from crispy_forms.layout import Submit, Layout, Fieldset
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 class SortForm(forms.Form):
 
     sort = forms.ChoiceField(choices=(
         ('title', u'Заголовок'),
         ('-time', u'Время'),
-        ('id', u'Id'),
-        ('my', u'Мои Блоги'),
     ))
 
-class SearchForm(forms.Form):
-    search = forms.CharField(required=False)
+
+# class CreateBlogForm(CreateView):
+#
+#     model = Blog
+#     fields = ('title', 'description', 'pic')
+#
+#     def __init__(self):
+#         super(CreateBlogForm, self).__init__()
+#         self.helper = FormHelper()
+#         self.helper.form_show_labels = False
+#         self.helper.form_method = 'get'
+#         self.helper.form_action = reverse('posts:blogs')
+#         self.helper.layout = Layout(
+#             Field('title', css_class="col-md-12"),
+#             Field('description', css_class="col-md-12"),
+#
+#         )
+
+
+# class SearchForm(forms.Form):
+#     search = forms.CharField(required=False)
 
 #class BlogForm(forms.ModelForm):
     #class Meta:

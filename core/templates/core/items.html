@@ -1,51 +1,55 @@
 {% extends "core/base.html" %}
 {% block content %}
-    <strong>Найдено: {{ object_list.count }}</strong>
-{% for object in object_list %}
-
-<div class="col-md-12">
-
-        <h1 class="page-header">
-            {{ object.title }}
-        </h1>
-
-        <!-- Blog -->
-        <p><span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> 
-            <a href="{% url "posts:blogs" %}?user={{ object.author }}" id="startedby">{{ object.author }}</a> |
-            <span class="glyphicon glyphicon-time" id="comment"></span> {{ object.time }} |
-            <span class="glyphicon glyphicon-th-large" id="visit"></span>
-            {% if object.category_set.all %}
-                {% for category in object.category_set.all %}
-                    {{ category.title }}
-                {% endfor %}
-            {% else %}
-                Без категорий
-            {% endif %}|
-            {% if object.like_set.all %}
-                {{ object.like_set.count }}
-                {% if user.liked_blogs.all and object.like_set.all %}
-                    <span class="glyphicon glyphicon-heart" id="visit"></span>
-                {% endif %}
-            {% else %}
-                <span class="glyphicon glyphicon-heart-empty" id="visit"></span>
-            {% endif %}
-            {% if object.author == user %}
-                |
-                <span class="glyphicon glyphicon-pencil" id="comment"></span>
-                <a href=" {% url "posts:edit_blog" pk=object.id %}">Редактировать</a>
-            {% endif %}
-
-        </p>
-        <hr>
-        {% if object.pic.url != Null %}
-            <a href="#" class="thumbnail"><img src="{{ object.pic.url }}" alt="img"></a>
-        {% else %}
-            <a href="#" class="thumbnail"><img src="http://placehold.it/900x300" alt=""></a>
-        {% endif %}
-
-        <article>{{ object.description }}</article>
-        </br>
-        <hr>
+    <div class="col-md-8">
+        <strong>Найдено: {{ object_list.count }}</strong>
     </div>
-{% endfor %}
+    {% for object in object_list %}
+
+        <div class="col-md-8">
+
+            <h1 class="page-header">
+                {{ object.title }}
+            </h1>
+
+            <!-- Blog -->
+            <p><span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> 
+                <a href="{% url "posts:blogs" %}?user={{ object.author }}" id="startedby">{{ object.author }}</a> |
+                <span class="glyphicon glyphicon-time" id="comment"></span> {{ object.time }} |
+                <span class="glyphicon glyphicon-th-large" id="visit"></span>
+                {% if object.category_set.all %}
+                    {% for category in object.category_set.all %}
+                        {{ category.title }}
+                    {% endfor %}
+                {% else %}
+                    Без категорий
+                {% endif %}|
+                {% if object.like_set.all %}
+                    {{ object.like_set.count }}
+                    {% if user.liked_blogs.all and object.like_set.all %}
+                        <span class="glyphicon glyphicon-heart" id="visit"></span>
+                    {% endif %}
+                {% else %}
+                    <span class="glyphicon glyphicon-heart-empty" id="visit"></span>
+                {% endif %}
+                {% if object.author == user %}
+                    |
+                    <span class="glyphicon glyphicon-pencil" id="comment"></span>
+                    <a href=" {% url "posts:edit_blog" pk=object.id %}">Редактировать</a>
+                {% endif %}
+
+            </p>
+            <hr>
+            {% if object.pic.url != Null %}
+                <a href="#" class="thumbnail"><img src="{{ object.pic.url }}" alt="img"></a>
+            {% else %}
+                <a href="#" class="thumbnail"><img src="http://placehold.it/900x300" alt=""></a>
+            {% endif %}
+
+            <article>{{ object.description }}</article>
+            </br>
+            <a href=" {% url "posts:blog" pk=object.id %} " class="btn btn-primary">Читать <span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+            <hr>
+        </div>
+    {% endfor %}
 {% endblock %}

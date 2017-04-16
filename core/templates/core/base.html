@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.css' %}" rel="stylesheet">
-    <script type="text/javascript" src="{% static 'jquery/dist/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script type="text/javascript" src="{% static 'jquery/dist/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base_search.js' %}"></script>
+
     {% block title %}
         <title>Start Page</title>
     {% endblock %}
@@ -48,7 +48,7 @@
                     </ul>
                 </li>
             </ul>
-            {% crispy search_form %}
+        <div >{% crispy search_form %}</div>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_anonymous %}
                     <li>
@@ -77,8 +77,13 @@
 </div>
 
 </body>
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.css' %}" rel="stylesheet">
+{#    <script type="text/javascript" src="{% static 'jquery/dist/jquery.js' %}"></script>#}
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+    <script src="{% static 'EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'EasyAutocomplete-1.3.5/easy-autocomplete.min.css' %}">
+    <script>
+        var get_blogs = JSON.parse("{{ get_blogs|escapejs }}");
+    </script>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-
+</html>

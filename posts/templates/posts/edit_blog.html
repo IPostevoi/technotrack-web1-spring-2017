@@ -14,7 +14,7 @@
                     <div class="panel-heading"><strong>{{ form.title }}</strong></div>
                     <div class="panel-body">
                         <div class="col-md-6">
-                            {% if object.pic.url %}
+                            {% if object.pic.url != Null %}
                                 <a href="#" class="thumbnail"><img src="{{ object.pic.url }}" alt="img"></a>
                             {% else %}
                                 <a href="#" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
@@ -32,7 +32,7 @@
                         <span class="glyphicon glyphicon-th-large" id="visit"></span> Категория |
                         {% if object.author == user %}
                             <span class="glyphicon glyphicon-comment" id="comment"></span>
-                            <a href=" {% url 'posts:edit_blog' pk=blog.id %}">Редактировать</a> |
+                            <a href=" {% url 'posts:edit_blog' pk=object.id %}">Редактировать</a> |
                         {% endif %}
                     </div>
                 </div>

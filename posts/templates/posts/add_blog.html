@@ -1,10 +1,7 @@
 {% extends "core/base.html" %}
 {% load widget_tweaks %}
+{% load crispy_forms_tags %}
 {% block content %}
-
-
-
-
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <form action="{% url 'posts:add_blog' %}" method="post">
@@ -31,5 +28,52 @@
         </div>
     </div>
     <input type="submit" value="Создать блог">
-{% endblock %}
 
+
+{#    <div class="col-md-8">#}
+{##}
+{#        <h1 class="page-header">#}
+{#            {{ form.title|as_crispy_field }}#}
+{#        </h1>#}
+{##}
+{#        <!-- Blog -->#}
+{#        <p><span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> #}
+{#            <a href="{% url "posts:blogs" %}?user={{ object.author }}" id="startedby">{{ object.id }}</a> |#}
+{#            <span class="glyphicon glyphicon-time" id="comment"></span> {{ object.time }} |#}
+{#            <span class="glyphicon glyphicon-th-large" id="visit"></span>#}
+{#            {% if object.category_set.all %}#}
+{#                {% for category in object.category_set.all %}#}
+{#                    {{ category.title }}#}
+{#                {% endfor %}#}
+{#            {% else %}#}
+{#                Без категорий#}
+{#            {% endif %}|#}
+{#            {% if object.like_set.all %}#}
+{#                {{ object.like_set.count }}#}
+{#                {% if user.liked_blogs.all and object.like_set.all %}#}
+{#                    <span class="glyphicon glyphicon-heart" id="visit"></span>#}
+{#                {% endif %}#}
+{#            {% else %}#}
+{#                <span class="glyphicon glyphicon-heart-empty" id="visit"></span>#}
+{#            {% endif %}#}
+{#            {% if object.author == user %}#}
+{#                |#}
+{#                <span class="glyphicon glyphicon-pencil" id="comment"></span>#}
+{#                <a href=" {% url "posts:edit_blog" pk=object.id %}">Редактировать</a>#}
+{#            {% endif %}#}
+{##}
+{#        </p>#}
+{#        <hr>#}
+{#        {% if object.pic.url != Null %}#}
+{#            <a href="#" class="thumbnail"><img src="{{ form.pic|as_crispy_field }}" alt="img"></a>#}
+{#        {% else %}#}
+{#            <a href="#" class="thumbnail"><img src="http://placehold.it/900x300" alt=""></a>#}
+{#        {% endif %}#}
+{##}
+{#        <article>{{ form.description|as_crispy_field }} </article>#}
+{#        </br>#}
+{#        <hr>#}
+{#    </div>#}
+
+
+{% endblock %}

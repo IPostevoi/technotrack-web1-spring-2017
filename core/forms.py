@@ -7,7 +7,7 @@ from crispy_forms.layout import Submit, Layout, Fieldset
 
 
 class SearchForm(forms.Form):
-    search = forms.CharField(required=False)
+    search = forms.CharField(required=True)
 
     def __init__(self):
         super(SearchForm, self).__init__()
@@ -17,10 +17,12 @@ class SearchForm(forms.Form):
         self.helper.form_action = reverse('core:items')
         self.helper.layout = Layout(
                      Field('search', placeholder='Искать',
+                           id="search-form",
                            css_class="form-control"))
 
         self.helper.add_input(Submit('submit', 'Submit', css_class="btn btn-default"))
         self.helper.form_class = "navbar-form navbar-right"
+        #self.helper.form_id = "search-form"
 
 
 

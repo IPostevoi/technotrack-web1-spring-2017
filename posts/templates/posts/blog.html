@@ -1,8 +1,8 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-
-    <div class="col-md-12">
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1 well">
 
         <h1 class="page-header">
             {{ object.title }}
@@ -44,17 +44,18 @@
 
         <article>{{ object.description }}</article>
         </br>
-        <hr>
-        <h2>Посты</h2>
-        <hr>
+
     </div>
+    </div>
+    <h2 align="center">Посты</h2>
 
 
     {% if object.post_set.all %}
 
 
         {% for post in object.post_set.all %}
-            <div class="col-md-12">
+            <div class="row">
+            <div class="col-md-10 col-md-offset-1 well">
                 <h2>
                     <div>{{ post.title }}</div>
                 </h2>
@@ -70,10 +71,8 @@
                 <a class="btn btn-primary" href="{% url "posts:post_comments" pk=post.id %}">Комментарии<span
                         class="glyphicon glyphicon-chevron-right"></span></a>
 
-                <hr>
-
             </div>
-
+            </div>
 
         {% endfor %}
     {% else %}
