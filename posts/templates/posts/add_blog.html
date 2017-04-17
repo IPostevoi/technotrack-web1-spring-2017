@@ -1,34 +1,36 @@
+{% extends "core/base.html" %}
 
-{% load widget_tweaks %}
+{% block content %}
 {% load crispy_forms_tags %}
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" action="{% url 'posts:add_blog' %}">
     {% csrf_token %}
-    <form action="{% url 'posts:add_blog' %}" method="post">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>Название: {{ form.title }}</strong></div>
-                    <div class="panel-body">
-                        <div class="col-md-6">
-                                <a href="#" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-                            {{ form.pic }}
-
-                        </div>
-                        <p>
-                            {{ form.description |add_class:"panel-body" }}
-                        </p>
-                    </div>
-                    <div class="panel-footer">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{ form|crispy }}
+{#        <div class="row">#}
+{#            <div class="col-md-6">#}
+{#                <div class="panel panel-default">#}
+{#                    <div class="panel-heading"><strong>Название: {{ form.title }}</strong></div>#}
+{#                    <div class="panel-body">#}
+{#                        <div class="col-md-6">#}
+{#                                <a href="#" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>#}
+{#                            {{ form.pic }}#}
+{##}
+{#                        </div>#}
+{#                        <p>#}
+{#                            {{ form.description |add_class:"panel-body" }}#}
+{#                        </p>#}
+{#                    </div>#}
+{#                    <div class="panel-footer">#}
+{#                        <p>#}
+{#                            {{ form.categories }}#}
+{#                        </p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
     <input type="submit" value="Создать блог">
-
+</form>
+{% endblock %}
 
 {#    <div class="col-md-8">#}
 {##}

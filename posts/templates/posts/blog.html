@@ -28,11 +28,38 @@
             {% else %}
                 <span class="glyphicon glyphicon-heart-empty" id="visit"></span>
             {% endif %}
-            {% if object.author == user %}
-                |
-                <span class="glyphicon glyphicon-pencil" id="comment"></span>
-                <a href=" {% url "posts:edit_blog" pk=object.id %}">Редактировать</a>
-            {% endif %}
+            {% if blog.author == user %}
+                            <span class="glyphicon glyphicon-pencil" id="comment"></span>
+                            <a class="edit-blog-ref" href=" {% url "posts:edit_blog" pk=blog.id %}" data-toggle="modal"
+                               data-target="#myModal" data-blogid="{{ blog.id }}"
+                               data-url="{% url "posts:edit_blog" pk=blog.id %}">Редактировать</a> |
+
+                            <div class="modal fade edit-blog" id="myModal" tabindex="-1" role="dialog"
+                                 data-url="{% url "posts:edit_blog" pk=blog.id %}">
+
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Редактирование</h4>
+                                        </div>
+                                        <div class="modal-body edit-blog">
+
+                                        </div>
+                                        <div class="modal-footer">
+{#                                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть#}
+{#                                            </button>#}
+{#                                            <button type="button" class="btn btn-primary" data-dismiss="modal">#}
+{#                                                Сохранить#}
+{#                                            </button>#}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        {% endif %}
 
         </p>
         <hr>

@@ -5,6 +5,7 @@ from comments.models import Comment
 
 # Create your models here.
 
+
 class Blog(models.Model):
 
     title = models.CharField(max_length=255)
@@ -21,6 +22,7 @@ class Post(models.Model):
     blog = models.ForeignKey('posts.Blog')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='published_posts')
     time = models.DateTimeField(auto_now_add=True)
+
 
 class Category(models.Model):
 
