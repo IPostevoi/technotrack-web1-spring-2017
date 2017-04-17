@@ -3,18 +3,23 @@
 
 {% block content %}
 
+{#    <form method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        <div class="card" style="width: 20rem;">#}
+{#            <div class="card-block">#}
+{#                Название: {{ form.title }}#}
+{#                Текст: {{ form.text }}#}
+{#                <input type="submit" value="Редактировать">#}
+{#            </div>#}
+{#        </div>#}
+{#    </form>#}
 
-    <div class="card" style="width: 20rem;">
-  <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-  <div class="card-block">
-      <form method="post">
+    <form class="ajaxform" method="post" enctype="multipart/form-data" data-url="{% url "posts:edit_post" pk=view.kwargs.pk %}">
         {% csrf_token %}
-        Название: {{ form.title|as_crispy_field }}
-          Текст: {{ form.text|as_crispy_field }}
+        {{ form|crispy }}
         <input type="submit" value="Редактировать">
     </form>
-  </div>
-    </div>
+
 {% endblock %}
 
 

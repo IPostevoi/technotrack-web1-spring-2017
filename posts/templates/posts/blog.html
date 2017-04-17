@@ -42,35 +42,39 @@
             <a href="#" class="thumbnail"><img src="http://placehold.it/900x300" alt=""></a>
         {% endif %}
 
-        <article>{{ object.description }}</article>
+        <article><p>{{ object.description }}</p></article>
+        <a class="btn btn-primary" href="{% url "posts:add_post" pk=blog.id %}">Добавить пост</a>
         </br>
 
     </div>
     </div>
+
     <h2 align="center">Посты</h2>
+
 
 
     {% if object.post_set.all %}
 
-
         {% for post in object.post_set.all %}
             <div class="row">
-            <div class="col-md-10 col-md-offset-1 well">
-                <h2>
-                    <div>{{ post.title }}</div>
-                </h2>
+                <div class="col-md-10 col-md-offset-1 well">
+                    <h2>
+                        <a href="{% url "posts:post" pk=post.id %}"><div>{{ post.title }}</div></a>
+                    </h2>
 
-                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.time }} |
-                    {% if object.author == user %}
-                        <span class="glyphicon glyphicon-pencil" id="comment"></span>
-                        <a href=" {% url 'posts:edit_post' pk=post.id %}">Редактировать пост</a> </p>
-                    {% endif %}
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.time }} |
+                        {% if object.author == user %}
+                            <span class="glyphicon glyphicon-pencil" id="comment"></span>
+                            <a href=" {% url 'posts:edit_post' pk=post.id %}">Редактировать пост</a> </p>
+                        {% endif %}
 
-                <article>{{ post.text }}</article>
-                </br>
-                <a class="btn btn-primary" href="{% url "posts:post_comments" pk=post.id %}">Комментарии<span
-                        class="glyphicon glyphicon-chevron-right"></span></a>
+                    <article>{{ post.text }}</article>
+                    </br>
+                    <a href="{% url 'posts:add_comment' pk=post.id %} " class="btn btn-primary add-comment">Добавить комментарий</a>
 
+                </div>
+            <div class="col-md-10 col-md-offset-1 comments-div" data-url="{% url "posts:post_comments" pk=post.id %}">
+{#                {% include "posts/comments.html" %}#}
             </div>
             </div>
 

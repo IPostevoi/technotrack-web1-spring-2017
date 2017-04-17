@@ -1,44 +1,12 @@
-{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
 {% load widget_tweaks %}
-{% block content %}
 
 
 
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>{{ form.title }}</strong></div>
-                    <div class="panel-body">
-                        <div class="col-md-6">
-                            {% if object.pic.url != Null %}
-                                <a href="#" class="thumbnail"><img src="{{ object.pic.url }}" alt="img"></a>
-                            {% else %}
-                                <a href="#" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-                            {% endif %}
-                        </div>
-                        <p>
-                            {{ form.description |add_class:"panel-body" }}
-                        </p>
-                            {{ form.pic }}
-                        <input type="submit" value="Принять">
-                    </div>
-                    <div class="panel-footer">
-                        <span class="glyphicon glyphicon-user" id="start"></span> <label
-                            id="started">By</label> {{ object.author }} |
-                        <span class="glyphicon glyphicon-th-large" id="visit"></span> Категория |
-                        {% if object.author == user %}
-                            <span class="glyphicon glyphicon-comment" id="comment"></span>
-                            <a href=" {% url 'posts:edit_blog' pk=object.id %}">Редактировать</a> |
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+    <form class="ajaxform" method="post" enctype="multipart/form-data" data-url="{% url "posts:edit_blog" pk=view.kwargs.pk %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Редактировать">
+    </form>
 
 

@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 well">
+            <a href=" {% url "posts:blog" pk=post.blog_id %}" class="btn btn-primary">Назад <span
+                    class="glyphicon glyphicon-chevron-left"></span></a>
+            <h2>
+                <div>{{ post.title }}</div>
+            </h2>
+
+            <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.time }} |
+                {% if object.author == user %}
+                    <span class="glyphicon glyphicon-pencil" id="comment"></span>
+                    <a href=" {% url 'posts:edit_post' pk=post.id %}">Редактировать пост</a> </p>
+                {% endif %}
+
+            <article>{{ post.text }}</article>
+            </br>
+            <a href=" {% url 'posts:add_comment' pk=post.id %}  " class="btn btn-primary">Добавить комментарий</a>
+
+        </div>
+        <div class="col-md-10 col-md-offset-1 comments-div" data-url="{% url "posts:post_comments" pk=post.id %}">
+            {#                {% include "posts/comments.html" %}#}
+        </div>
+    </div>
+
+{% endblock %}
+

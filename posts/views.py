@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-from .models import Blog, Post, Category
+from .models import Blog, Post, Category, Like
+from comments.models import Comment
 from core.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, View
 from django import forms
 from django.core.urlresolvers import reverse
 from posts.forms import SortForm
 from crispy_forms.helper import FormHelper
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from crispy_forms.bootstrap import Field
 from crispy_forms.layout import Submit, Layout, Fieldset
 
@@ -25,7 +27,12 @@ class UpdateBlog(UpdateView):
         return super(UpdateBlog, self).get_queryset().filter(author=self.request.user)
 
     def form_valid(self, form):
-        return super(UpdateBlog, self).form_valid(form)
+        response = super(UpdateBlog, self).form_valid(form)
+        return HttpResponse('OK')
+        #return super(UpdateBlog, self).form_valid(form)
+
+    # def post(self, request):
+    #     return HttpResponse('valid')
 
 
 class CreateBlog(CreateView):
@@ -79,13 +86,23 @@ class UpdatePost(UpdateView):
 
     template_name = "posts/edit_post.html"
     model = Post
-    fields = ('title', 'text', 'blog')
+    fields = ('title', 'text')
 
     def get_success_url(self):
-        return reverse('posts:posts')
+        return reverse('posts:post', args=(self.object.id,))
 
     def get_queryset(self):
         return super(UpdatePost, self).get_queryset().filter(author=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.blog = Blog.objects.get(id=self.kwargs['pk'])
+        return super(UpdatePost, self).form_valid(form)
+        #response  =super(UpdatePost, self).form_valid(form)
+        #return HttpResponse('valid')
+
+    def post(self, request):
+        return HttpResponse('valid')
 
 
 class CreatePost(CreateView):
@@ -183,7 +200,37 @@ class BlogPage(DetailView):
 
 class PostComments(DetailView):
 
-    queryset = Post.objects.order_by('-time').all()
-    template_name = 'posts/post_comments.html'
+    queryset = Post.objects.all()
+    template_name = 'posts/post.html'
+
+
+class BlogLikeAjaxView(View):
+
+    blog_object = None
+
+    def dispatch(self, request, pk=None, *args, **kwargs):
+        # Забираем из базы пост, который собираются лайкнуть
+        self.blog_object = get_object_or_404(Blog, id=pk)
+        return super(BlogLikeAjaxView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+
+        if not self.blog_object.like_set.filter(author=self.request.user).exists():
+            # Сначала мы проверили, что лайка от этого юзера у поста еще нет
+            # Теперь мы здесь должны создать лайк, и вернуть новое количество лайков у поста
+            like = Like(blog=self.blog_object, author=self.request.user)
+            like.save(force_insert=True)
+
+        return HttpResponse(Like.objects.filter(blog=self.blog_object).count())
+
+
+class CommentsList(ListView):
+
+    template_name = 'posts/comments.html'
+    queryset = Comment.objects.all()
+
+    def get_queryset(self):
+        return super(CommentsList, self).get_queryset().filter(post_id=self.kwargs['pk'])
+
 
 
